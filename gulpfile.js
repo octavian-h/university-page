@@ -10,9 +10,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 'use strict';
 
-// Include promise polyfill for node 0.10 compatibility
-require('es6-promise').polyfill();
-
 // Include Gulp & tools we'll use
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
@@ -118,12 +115,9 @@ gulp.task('images', function() {
 // Copy all files at the root level (app)
 gulp.task('copy', function() {
   var app = gulp.src([
-    'app/*',
-    '!app/test',
+    'app/*',    
     '!app/elements',
-    '!app/bower_components',
-    '!app/cache-config.json',
-    '!**/.DS_Store'
+    '!app/bower_components'
   ], {
     dot: true
   }).pipe(gulp.dest(dist()));
@@ -131,7 +125,7 @@ gulp.task('copy', function() {
   // Copy over only the bower_components we need
   // These are things which cannot be vulcanized
   var bower = gulp.src([
-    'app/bower_components/{webcomponentsjs,promise-polyfill}/**/*'
+    'app/bower_components/{webcomponentsjs}/**/*'
   ]).pipe(gulp.dest(dist('bower_components')));
 
   return merge(app, bower)
@@ -152,7 +146,7 @@ gulp.task('fonts', function() {
 // Scan your HTML for assets & optimize them
 gulp.task('html', function() {
   return optimizeHtmlTask(
-    ['app/**/*.html', '!app/{elements,test,bower_components}/**/*.html'],
+    ['app/**/*.html', '!app/{elements,bower_components}/**/*.html'],
     dist());
 });
 
@@ -232,18 +226,6 @@ gulp.task('default', ['clean'], function(cb) {
   runSequence(
     ['ensureFiles', 'copy', 'styles'],
     ['images', 'fonts', 'html'],
-    'vulcanize', // 'cache-config',
+    'vulcanize',
     cb);
 });
-
-
-// Load tasks for web-component-tester
-// Adds tasks for `gulp test:local` and `gulp test:remote`
-require('web-component-tester').gulp.init(gulp);
-
-// Load custom tasks from the `tasks` directory
-try {
-  require('require-dir')('tasks');
-} catch (err) {
-  // Do nothing
-}

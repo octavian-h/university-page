@@ -101,7 +101,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <iron-pages attr-for-selected="data-route" selected="{{route}}">
         <section data-route="home">
           <paper-material elevation="1">
-            <p>I am a Ph.D. student at the <a href="http://www.utcluj.ro">Technical University of Cluj-Napoca</a>.</p>
+            <p class="focus-target">I am a Ph.D. student at the <a href="http://www.utcluj.ro">Technical University of
+              Cluj-Napoca</a>.</p>
           </paper-material>
 
           <paper-material elevation="1">
@@ -232,10 +233,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </template>
 
 <script>
-  !function(L,u,c,i,a,n){L.GoogleAnalyticsObject=c;L[c]||(L[c]=function(){
-    (L[c].q=L[c].q||[]).push(arguments)});L[c].l=+new Date;a=u.createElement(i);
-    n=u.getElementsByTagName(i)[0];a.src='//www.google-analytics.com/analytics.js';
-    n.parentNode.insertBefore(a,n)}(window,document,'ga','script');
+  !function (L, u, c, i, a, n) {
+    L.GoogleAnalyticsObject = c;
+    L[c] || (L[c] = function () {
+      (L[c].q = L[c].q || []).push(arguments)
+    });
+    L[c].l = +new Date;
+    a = u.createElement(i);
+    n = u.getElementsByTagName(i)[0];
+    a.src = '//www.google-analytics.com/analytics.js';
+    n.parentNode.insertBefore(a, n)
+  }(window, document, 'ga', 'script');
 
   ga('create', 'UA-26703491-2', 'auto');
   ga('send', 'pageview');
