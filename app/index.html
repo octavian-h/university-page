@@ -1,0 +1,249 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Octavian Hasna's homepage">
+  <title>Octavian Hasna's homepage</title>
+
+  <!-- Place favicon.ico in the `app/` directory -->
+
+  <!-- Chrome for Android theme color -->
+  <meta name="theme-color" content="#2E3AA1">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Tile color for Win8 -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="PSK">
+  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+  <!-- Tile icon for Win8 (144x144) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- endbuild -->
+
+  <!-- Because this project uses vulcanize this should be your only html import
+       in this file. All other imports should go in elements.html -->
+  <link rel="import" href="elements/elements.html">
+
+  <!-- For shared styles, shared-styles.html import in elements.html -->
+  <style is="custom-style" include="shared-styles"></style>
+</head>
+
+<body unresolved>
+<!-- build:remove -->
+<span id="browser-sync-binding"></span>
+<!-- endbuild -->
+
+<template is="dom-bind" id="app">
+
+  <!-- Main Area -->
+  <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+    <!-- Main Toolbar -->
+    <paper-toolbar id="mainToolbar" class="tall">
+
+      <span class="space"></span>
+
+      <!-- Application name -->
+      <div class="app-name middle middle-container">Octavian Lucian Hasna</div>
+
+      <!-- Tabs bottom-container -->
+      <paper-tabs id="paperTabs" class="bottom bottom-container" selected="0" scrollable noink no-bar>
+        <paper-tab>
+          <a data-route="home" href="{{baseUrl}}">HOME</a>
+        </paper-tab>
+        <paper-tab>
+          <a data-route="teaching" href="{{baseUrl}}teaching">TEACHING</a>
+        </paper-tab>
+        <paper-tab>
+          <a data-route="research" href="{{baseUrl}}research">RESEARCH</a>
+        </paper-tab>
+        <paper-tab>
+          <a data-route="publications" href="{{baseUrl}}publications">PUBLICATIONS</a>
+        </paper-tab>
+        <paper-tab>
+          <a data-route="contact" href="{{baseUrl}}contact">CONTACT</a>
+        </paper-tab>
+      </paper-tabs>
+    </paper-toolbar>
+
+    <!-- Main Content -->
+    <div class="content">
+      <iron-pages attr-for-selected="data-route" selected="{{route}}">
+        <section data-route="home">
+          <paper-material elevation="1">
+            <p>I am a Ph.D. student at the <a href="http://www.utcluj.ro">Technical University of Cluj-Napoca</a>.</p>
+          </paper-material>
+
+          <paper-material elevation="1">
+            <h2>Short Bio</h2>
+            <ul>
+              <li><b>October 2014 - Present</b>: Ph.D. Student in Computer Science at the Technical University of
+                Cluj-Napoca (under the supervision of <a href="http://users.utcluj.ro/~potolea/">Rodica Potolea</a>)
+              </li>
+              <li><b>October 2012 - June 2014</b>: M.Sc. in Software Engineering at the Technical University of
+                Cluj-Napoca
+              </li>
+              <li><b>October 2008 - June 2012</b>: B.Sc. in Computer Science at the Technical University of
+                Cluj-Napoca
+              </li>
+              <li><b>October 2004 - June 2008</b>: <a href="http://www.balcescucj.ro/">Nicolae Bălcescu High School</a>,
+                Cluj-Napoca
+              </li>
+            </ul>
+
+          </paper-material>
+        </section>
+
+        <section data-route="teaching">
+          <paper-material elevation="1">
+            <h1 class="page-title focus-target" tabindex="-1">Teaching</h1>
+            <p>Laboratories:</p>
+            <ul>
+              <li><a href="http://moodle.cs.utcluj.ro/course/index.php?categoryid=28">Fundamental Algorithms</a> (year 2
+                CS, 2nd semester)
+              </li>
+              <li><a href="https://algo.gnomio.com">Logic Programming</a> (year 3 CS, 1st semester)</li>
+            </ul>
+          </paper-material>
+        </section>
+
+        <section data-route="research">
+          <paper-material elevation="1">
+            <h1 class="page-title focus-target" tabindex="-1">Research</h1>
+            <p> My thesis goal is to extract patterns and knowledge from sensor data
+              in order to drive improvements in the way customers use a given product.
+              In this context, the fields of interest are: </p>
+            <ul>
+              <li>Time Series Analysis (<a href="https://github.com/octavian-h/time-series-math">code</a>)</li>
+              <li>Recommendation Systems</li>
+              <li>Sentiment Analysis</li>
+            </ul>
+
+            <p>I am part of the <a href="http://keg.utcluj.ro/">Knowledge Engineering Research Group</a>.</p>
+
+            <p>My current focus is on overcoming source signal dependence in time series analysis.</p>
+          </paper-material>
+        </section>
+
+        <section data-route="publications">
+          <paper-material elevation="1">
+            <h1 class="page-title focus-target" tabindex="-1">Publications</h1>
+            <h2>2014</h2>
+            <p>
+              Octavian Lucian Hasna, Florin Cristian Măcicăşan, Mihaela Dînşoreanu &amp; Rodica Potolea (2014).
+              <b>Modeling Sentiment Polarity with Meta-features to Achieve Domain-Independence</b>.
+              In <i>Knowledge Discovery, Knowledge Engineering and Knowledge Management</i> (pp. 212-227). Springer
+              International Publishing.
+              <a href="http://link.springer.com/chapter/10.1007%2F978-3-319-25840-9_14">(link)</a>
+            </p>
+            <p>
+              Octavian Lucian Hasna, Florin Cristian Măcicăşan, Mihaela Dînşoreanu &amp; Rodica Potolea (2014).
+              <b>Sentiment Polarity Extension for Context-Sensitive Recommender Systems</b>.
+              In <i>proceedings of the International Conference of Knowledge Discovery and Information Retrieval
+              (KDIR)</i> (pp. 126-137). Rome, Italy.
+              <i>(nominated for the "best student paper" award)</i>
+              <a href="http://bit.ly/kdir2014art">(pdf)</a> <a href="http://bit.ly/kdir2014prez">(prez)</a>
+            </p>
+
+            <h2>2012</h2>
+            <p>
+              Florin Cristian Măcicăşan &amp; Octavian Lucian Hasna (2012).
+              <b>Context-Behavioral Advertisement Recommendation – A Unified Approach</b>.
+              In the <i>3rd Computer Science Student Conference</i> Cluj-Napoca, Romania.
+              <i>won the 3rd prize (from TUCN students)</i>
+              <a href="http://bit.ly/cssc2012art">(pdf)</a> <a href="http://bit.ly/cssc2012prez">(prez)</a>
+            </p>
+            <p>
+              Mihaela Dînşoreanu, Florin Cristian Măcicăşan, Octavian Lucian Hasna &amp; Rodica Potolea (2012).
+              <b>A Unified Approach for Context-sensitive Recommendations</b>.
+              In <i>proceedings of the International Conference of Knowledge Discovery and Information Retrieval
+              (KDIR)</i> (pp. 85-94). Barcelona, Spain.
+              <i>(nominated for the "best student paper" award)</i>
+              <a href="http://bit.ly/kdir2012art">(pdf)</a> <a href="http://bit.ly/kdir2012prez">(prez)</a>
+            </p>
+          </paper-material>
+        </section>
+
+        <section data-route="contact">
+          <paper-material elevation="1">
+            <h1 class="page-title focus-target" tabindex="-1">Contact</h1>
+            <address>
+              <div class="vcard">
+                <span class="fn n">
+                  <span class="given-name">Octavian</span>
+                  <span class="additional-name">Lucian</span>
+                  <span class="family-name">Hasna</span>
+                </span>
+                <div class="org">Technical University of Cluj-Napoca</div>
+                <a class="email" href="mailto:octavian.hasna@cs.utcluj.ro">octavian.hasna@cs.utcluj.ro</a>
+                <div class="adr">
+                  <div class="street-address">26-28, Barițiu St., room M03</div>
+                  <span class="locality">Cluj-Napoca</span>,
+                  <span class="region">Cluj</span>,
+                  <span class="postal-code">400027</span>,
+                  <span class="country-name">România</span>
+                </div>
+              </div>
+            </address>
+          </paper-material>
+        </section>
+      </iron-pages>
+    </div>
+  </paper-scroll-header-panel>
+
+  <footer>
+    <small>&copy; 2016 Octavian Hasna</small>
+  </footer>
+
+  <paper-toast id="toast">
+    <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+  </paper-toast>
+
+</template>
+
+<script>
+  !function(L,u,c,i,a,n){L.GoogleAnalyticsObject=c;L[c]||(L[c]=function(){
+    (L[c].q=L[c].q||[]).push(arguments)});L[c].l=+new Date;a=u.createElement(i);
+    n=u.getElementsByTagName(i)[0];a.src='//www.google-analytics.com/analytics.js';
+    n.parentNode.insertBefore(a,n)}(window,document,'ga','script');
+
+  ga('create', 'UA-26703491-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<!-- build:js scripts/app.js -->
+<script src="scripts/app.js"></script>
+<!-- endbuild-->
+</body>
+
+</html>
