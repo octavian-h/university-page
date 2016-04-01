@@ -16,9 +16,8 @@ branches:
 before_script:
 - npm install -g bower@1.7.1 gulp@3.9.0
 - bower install
-deploy:
-  provider: script
-  script: bash ./ci/deploy.sh
+script:
+- bash ./ci/deploy.sh
 env:
   matrix:
   - CXX=g++-4.8
