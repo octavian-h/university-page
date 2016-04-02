@@ -21,7 +21,13 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
    [[ "$COMMIT_MESSAGE" != "[no-deploy]"* ]]; then
 
     echo "Deploying to users.utcluj.ro"
+    # collapse tabs arrows
+    sed --in-place "s/return 'not-visible'/return 'hidden'/g" app/bower_components/paper-tabs/paper-tabs.html
+    # add build number
+    sed --in-place "s/(rev 1)/(rev $TRAVIS_BUILD_NUMBER)/g" app/index.html
+    # build app
     gulp
+    # copy dist folder content to users.utcluj.ro
     lftp -u $FTP_USER,$FTP_PASS users.utcluj.ro -e 'mirror --delete --only-newer --reverse --verbose dist ~/public_html ; exit'
 else
    echo "Skip deploy"
