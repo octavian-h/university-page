@@ -13,9 +13,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="generator" content="Octavian Hasna's homepage">
+  <meta name="application-name" content="Octavian Hasna's homepage">
+  <meta name="description" content="">
   <title>Octavian Hasna's homepage</title>
 
   <!-- Place favicon.ico in the `app/` directory -->
@@ -26,22 +26,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- Web Application Manifest -->
   <link rel="manifest" href="manifest.json">
 
-  <!-- Tile color for Win8 -->
-  <meta name="msapplication-TileColor" content="#3372DF">
-
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="PSK">
-  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+  <link rel="icon" sizes="192x192" href="images/icons/android-chrome-192x192.png">
 
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
-  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon-180x180.png">
 
-  <!-- Tile icon for Win8 (144x144) -->
-  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <!-- Tile icon for Win -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+  <meta name="msapplication-TileImage" content="/images/icons/mstile-144x144.png">
 
   <!-- build:css styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
@@ -233,17 +229,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </template>
 
 <script>
-  !function (L, u, c, i, a, n) {
-    L.GoogleAnalyticsObject = c;
-    L[c] || (L[c] = function () {
-      (L[c].q = L[c].q || []).push(arguments)
-    });
-    L[c].l = +new Date;
-    a = u.createElement(i);
-    n = u.getElementsByTagName(i)[0];
-    a.src = '//www.google-analytics.com/analytics.js';
-    n.parentNode.insertBefore(a, n)
-  }(window, document, 'ga', 'script');
+  !function(L,u,c,i,a,n){L.GoogleAnalyticsObject=c;L[c]||(L[c]=function(){(L[c].q=L[c].q||[]).push(arguments)});
+    L[c].l=+new Date;a=u.createElement(i);n=u.getElementsByTagName(i)[0];
+    a.src='//www.google-analytics.com/analytics.js';n.parentNode.insertBefore(a,n)}(window,document,'ga','script');
 
   ga('create', 'UA-26703491-2', 'auto');
   ga('send', 'pageview');
