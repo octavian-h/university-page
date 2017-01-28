@@ -1,12 +1,12 @@
 # Dependency directory
 node_modules/
-app/bower_components/
+bower_components/
 
 # Optional npm cache directory
 .npm/
 .tmp/
 
-dist/
+build/
 
 ### JetBrains
 ## Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
@@ -14,7 +14,3 @@ dist/
 
 ## Directory-based project format:
 .idea/
-
-## File-based project format:
-*.ipr
-*.iws

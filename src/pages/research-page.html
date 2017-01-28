@@ -1,0 +1,30 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="research-page">
+  <template>
+    <style include="shared-styles"></style>
+
+    <div class="card">
+      <h2>Research</h2>
+      <p> My thesis goal is to extract patterns and knowledge from sensor data
+        in order to drive improvements in the way customers use a given product.
+        In this context, the fields of interest are: </p>
+      <ul>
+        <li>Time Series Analysis (<a href="https://github.com/octavian-h/time-series-math">code</a>)</li>
+        <li>Recommendation Systems</li>
+        <li>Sentiment Analysis</li>
+      </ul>
+
+      <p>I am part of the <a href="http://keg.utcluj.ro/">Knowledge Engineering Research Group</a>.</p>
+
+      <p>My current focus is on overcoming source signal dependence in time series analysis.</p>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'research-page',
+    });
+  </script>
+</dom-module>

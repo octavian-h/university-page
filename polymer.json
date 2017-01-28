@@ -1,0 +1,22 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/main-app.html",
+  "fragments": [
+    "src/pages/home-page.html",
+    "src/pages/teaching-page.html",
+    "src/pages/research-page.html",
+    "src/pages/publications-page.html",
+    "src/pages/contact-page.html",
+    "src/pages/error-page.html"
+  ],
+  "sources": [
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
+  ],
+  "includeDependencies": [
+    "manifest.json",
+    "robots.txt",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ]
+}

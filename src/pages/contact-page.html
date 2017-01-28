@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="contact-page">
+  <template>
+    <style include="shared-styles"></style>
+
+    <div class="card">
+      <h2>Contact</h2>
+      <div class="h-card">
+        <span class="p-name">Octavian Hasna</span> <br/>
+        <a class="u-email" href="mailto:[[localPart]]@cs.utcluj.ro">[[localPart]]@cs.utcluj.ro</a> <br/> <br/>
+        <span class="p-org">Technical University of Cluj-Napoca</span>
+        <div class="p-adr">
+          <span class="p-street-address">26-28, Barițiu St., room M03</span> <br/>
+          <span class="p-locality">Cluj-Napoca</span>,
+          <span class="p-region">Cluj</span>,
+          <span class="p-postal-code">400027</span>,
+          <span class="p-country-name">România</span>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'contact-page',
+      properties: {
+        localPart: String
+      }
+    });
+  </script>
+</dom-module>

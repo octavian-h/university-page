@@ -1,0 +1,201 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+
+<dom-module id="main-app">
+  <template>
+    <style include="shared-styles">
+      :host {
+        --app-primary-color: #3F51B5;
+        --app-secondary-color: black;
+
+        display: block;
+      }
+
+      app-header-layout {
+        z-index: 1;
+      }
+
+      app-header {
+        color: #fff;
+        background-color: var(--app-primary-color);
+      }
+
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+
+      paper-tabs {
+        height: 100%;
+        max-width: 640px;
+      }
+
+      paper-tab a {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #fff;
+      }
+
+      paper-item a {
+        display: block;
+        height: 100%;
+        width: 100%;
+
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--app-secondary-color);
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      footer {
+        text-align: center;
+      }
+    </style>
+
+    <app-location route="{{route}}" use-hash-as-path></app-location>
+    <app-route
+      route="{{route}}"
+      pattern="/:page"
+      data="{{routeData}}"
+      tail="{{subroute}}">
+    </app-route>
+
+    <app-drawer-layout force-narrow>
+      <!-- Drawer content -->
+      <app-drawer id="drawer" forceNarrow>
+        <app-toolbar></app-toolbar>
+
+        <!-- Nav on mobile: side nav menu -->
+        <paper-menu selected="[[page]]" attr-for-selected="name" role="navigation">
+          <template is="dom-repeat" items="{{items}}">
+            <paper-item name="{{item}}">
+              <a href="/#/{{item}}">{{item}}</a>
+            </paper-item>
+          </template>
+        </paper-menu>
+      </app-drawer>
+
+      <!-- Main content -->
+      <app-header-layout>
+
+        <app-header condenses reveals effects="waterfall">
+          <app-toolbar>
+            <paper-icon-button icon="menu" drawer-toggle
+                               hidden$="{{wideLayout}}"></paper-icon-button>
+            <h1 main-title>Octavian Hasna</h1>
+          </app-toolbar>
+
+          <app-toolbar sticky$="{{wideLayout}}" hidden$="{{!wideLayout}}">
+
+            <!-- Nav on desktop: tabs -->
+            <paper-tabs selected="{{page}}" attr-for-selected="name">
+              <template is="dom-repeat" items="{{items}}">
+                <paper-tab name="{{item}}">
+                  <a href="/#/{{item}}">{{item}}</a>
+                </paper-tab>
+              </template>
+            </paper-tabs>
+          </app-toolbar>
+        </app-header>
+
+        <iron-media-query query="min-width: 600px" query-matches="{{wideLayout}}"></iron-media-query>
+      </app-header-layout>
+
+      <iron-pages
+        selected="[[page]]"
+        attr-for-selected="name"
+        fallback-selection="error"
+        role="main">
+        <home-page name="home"></home-page>
+        <teaching-page name="teaching"></teaching-page>
+        <research-page name="research"></research-page>
+        <publications-page name="publications"></publications-page>
+        <contact-page name="contact" local-part="octavian.hasna"></contact-page>
+        <error-page name="error"></error-page>
+      </iron-pages>
+
+      <footer>
+        <small>&copy; 2017 Octavian Hasna (rev 1)</small>
+      </footer>
+    </app-drawer-layout>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'main-app',
+
+      properties: {
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_pageChanged'
+        },
+
+        wideLayout: {
+          type: Boolean,
+          value: false,
+          observer: '_layoutChange'
+        },
+
+        items: {
+          type: Array,
+          value: function () {
+            return ['home', 'teaching', 'research',
+              'publications', 'contact'];
+          }
+        }
+      },
+
+      observers: [
+        '_routePageChanged(routeData.page)',
+      ],
+
+      _routePageChanged: function (page) {
+        this.page = page || 'home';
+
+        if (!this.$.drawer.persistent) {
+          this.$.drawer.close();
+        }
+      },
+
+      _pageChanged: function (page) {
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl('pages/' + page + '-page.html');
+        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+      },
+
+      _showPage404: function () {
+        this.page = 'error';
+      },
+
+      _layoutChange: function (wide) {
+        var drawer = this.$.drawer;
+        if (wide && drawer.opened) {
+          drawer.opened = false;
+        }
+      }
+    });
+  </script>
+</dom-module>
