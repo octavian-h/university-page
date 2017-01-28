@@ -20,7 +20,7 @@
 
 <dom-module id="main-app">
   <template>
-    <style include="shared-styles">
+    <style>
       :host {
         --app-primary-color: #3F51B5;
         --app-secondary-color: black;
@@ -39,6 +39,10 @@
 
       app-header paper-icon-button {
         --paper-icon-button-ink-color: white;
+      }
+
+      h2[main-title] {
+        padding-left: 12px;
       }
 
       paper-tabs {
