@@ -91,7 +91,7 @@
         <paper-menu selected="[[page]]" attr-for-selected="name" role="navigation">
           <template is="dom-repeat" items="{{items}}">
             <paper-item name="{{item}}">
-              <a href="/#/{{item}}">{{item}}</a>
+              <a href="[[basePath]]#/{{item}}">{{item}}</a>
             </paper-item>
           </template>
         </paper-menu>
@@ -113,7 +113,7 @@
             <paper-tabs selected="{{page}}" attr-for-selected="name">
               <template is="dom-repeat" items="{{items}}">
                 <paper-tab name="{{item}}">
-                  <a href="/#/{{item}}">{{item}}</a>
+                  <a href="[[basePath]]#/{{item}}">{{item}}</a>
                 </paper-tab>
               </template>
             </paper-tabs>
@@ -133,7 +133,7 @@
         <research-page name="research"></research-page>
         <publications-page name="publications"></publications-page>
         <contact-page name="contact" local-part="octavian.hasna"></contact-page>
-        <error-page name="error"></error-page>
+        <error-page name="error" base-path="[[basePath]]"></error-page>
       </iron-pages>
     </app-drawer-layout>
 
@@ -147,6 +147,8 @@
       is: 'main-app',
 
       properties: {
+        basePath: String,
+
         page: {
           type: String,
           reflectToAttribute: true,

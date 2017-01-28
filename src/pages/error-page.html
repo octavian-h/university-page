@@ -7,13 +7,17 @@
 
     <div class="card">
       <h2>Page not found</h2>
-      <p>Head back to <a href="/#/">home</a>.</p>
+      <p>Head back to <a href="[[basePath]]#/">home</a>.</p>
     </div>
   </template>
 
   <script>
     Polymer({
-      is: 'error-page'
+      is: 'error-page',
+
+      properties: {
+        basePath: String
+      }
     });
   </script>
 </dom-module>

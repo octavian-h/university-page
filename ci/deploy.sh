@@ -21,8 +21,10 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
    [[ "$COMMIT_MESSAGE" != "[no-deploy]"* ]]; then
 
     echo "Deploying to users.utcluj.ro"
-    # add build number
+    # update build number
     sed --in-place "s/(rev 1)/(rev $TRAVIS_BUILD_NUMBER)/g" src/main-app.html
+    # update base path
+    sed --in-place "s/\"\/\"/\"\/~octavianh\/\"/g" index.html
     # build app
     polymer build
     # copy dist folder content to users.utcluj.ro
