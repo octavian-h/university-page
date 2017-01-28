@@ -22,7 +22,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
 
     echo "Deploying to users.utcluj.ro"
     # add build number
-    sed --in-place "s/(rev 1)/(rev $TRAVIS_BUILD_NUMBER)/g" app/index.html
+    sed --in-place "s/(rev 1)/(rev $TRAVIS_BUILD_NUMBER)/g" src/main-app.html
     # build app
     polymer build
     # copy dist folder content to users.utcluj.ro
