@@ -25,8 +25,11 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
     echo "Update build number"
     sed --in-place "s/(rev 1)/(rev $TRAVIS_BUILD_NUMBER)/g" src/main-app.html
 
+    echo "Update rootPath"
+    sed --in-place "s/'\/'/'\/~octavianh\/'/g" index.html
+
     echo "Build app"
-    polymer build --base-path=/~octavianh/
+    polymer build
 
     echo "Copy build folder to users.utcluj.ro"
     LOCAL_PATH='./build/default'

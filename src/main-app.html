@@ -94,11 +94,11 @@
 
     <app-location
       route="{{route}}"
-      url-space-regex="^[[rootPath]]">
+      use-hash-as-path>
     </app-location>
     <app-route
       route="{{route}}"
-      pattern="[[rootPath]]:page"
+      pattern="/:page"
       data="{{routeData}}"
       tail="{{subroute}}">
     </app-route>
@@ -111,7 +111,7 @@
         <!-- Nav on mobile: side nav menu -->
         <iron-selector selected="[[page]]" attr-for-selected="name" role="navigation" class="drawer-list">
           <template is="dom-repeat" items="[[items]]">
-              <a name="[[item]]" href="[[rootPath]][[item]]">[[item]]</a>
+              <a name="[[item]]" href="[[rootPath]]#/[[item]]">[[item]]</a>
           </template>
         </iron-selector>
       </app-drawer>
@@ -132,7 +132,7 @@
             <paper-tabs selected="[[page]]" attr-for-selected="name" role="navigation">
               <template is="dom-repeat" items="{{items}}">
                 <paper-tab name="[[item]]">
-                  <a href="[[rootPath]][[item]]">[[item]]</a>
+                  <a href="[[rootPath]]#/[[item]]">[[item]]</a>
                 </paper-tab>
               </template>
             </paper-tabs>
