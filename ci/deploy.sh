@@ -32,7 +32,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
     polymer build
 
     echo "Copy build folder to users.utcluj.ro"
-    LOCAL_PATH='./build/default'
+    LOCAL_PATH='./build/es5-bundled'
     REMOTE_PATH='./public_html'
     lftp -e "set dns:order 'inet'
       open ftp://users.utcluj.ro
