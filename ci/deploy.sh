@@ -31,13 +31,11 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
     echo "Copy build folder to users.utcluj.ro"
     LOCAL_PATH='./build/default'
     REMOTE_PATH='./public_html'
-    lftp -f "
-      set dns:order 'inet'
+    lftp -e "set dns:order 'inet'
       open ftp://users.utcluj.ro
       user $FTP_USER $FTP_PASS
       mirror --delete --only-newer --reverse --verbose $LOCAL_PATH $REMOTE_PATH
-      bye
-    "
+      bye"
 else
    echo "Skip deploy"
 fi
