@@ -34,7 +34,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
     lftp -f "
       set dns:order 'inet'
       open ftp://users.utcluj.ro
-      user $FTP_USER $FTP_PASSWORD
+      user $FTP_USER $FTP_PASS
       mirror --delete --only-newer --reverse --verbose $LOCAL_PATH $REMOTE_PATH
       bye
     "
