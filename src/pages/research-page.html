@@ -1,4 +1,4 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../shared-styles.html">
 
 <dom-module id="research-page">
@@ -23,8 +23,12 @@
   </template>
 
   <script>
-    Polymer({
-      is: 'research-page'
-    });
+    class ResearchPage extends Polymer.Element {
+      static get is() {
+        return 'research-page';
+      }
+    }
+
+    window.customElements.define(ResearchPage.is, ResearchPage);
   </script>
 </dom-module>

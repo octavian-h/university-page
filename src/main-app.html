@@ -1,4 +1,4 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
@@ -9,14 +9,20 @@
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/paper-item/paper-item.html">
-<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+
+<link rel="lazy-import" href="pages/home-page.html">
+<link rel="lazy-import" href="pages/contact-page.html">
+<link rel="lazy-import" href="pages/publications-page.html">
+<link rel="lazy-import" href="pages/research-page.html">
+<link rel="lazy-import" href="pages/teaching-page.html">
+<link rel="lazy-import" href="pages/error-page.html">
 
 <dom-module id="main-app">
   <template>
@@ -41,6 +47,24 @@
         --paper-icon-button-ink-color: white;
       }
 
+      .drawer-list {
+        margin: 0 20px;
+      }
+
+      .drawer-list a {
+        display: block;
+        padding: 0 16px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--app-secondary-color);
+        line-height: 40px;
+      }
+
+      .drawer-list a.iron-selected {
+        color: black;
+        font-weight: bold;
+      }
+
       h2[main-title] {
         padding-left: 12px;
       }
@@ -51,22 +75,12 @@
       }
 
       paper-tab a {
-        @apply(--layout-horizontal);
-        @apply(--layout-center-center);
+        @apply --layout-horizontal;
+        @apply --layout-center-center;
 
         text-transform: uppercase;
         text-decoration: none;
         color: #fff;
-      }
-
-      paper-item a {
-        display: block;
-        height: 100%;
-        width: 100%;
-
-        text-transform: uppercase;
-        text-decoration: none;
-        color: var(--app-secondary-color);
       }
 
       [hidden] {
@@ -78,46 +92,47 @@
       }
     </style>
 
-    <app-location route="{{route}}" use-hash-as-path></app-location>
+    <app-location
+      route="{{route}}"
+      url-space-regex="^[[rootPath]]">
+    </app-location>
     <app-route
       route="{{route}}"
-      pattern="/:page"
+      pattern="[[rootPath]]:page"
       data="{{routeData}}"
       tail="{{subroute}}">
     </app-route>
 
     <app-drawer-layout force-narrow>
       <!-- Drawer content -->
-      <app-drawer id="drawer" forceNarrow>
+      <app-drawer id="drawer" slot="drawer" swipe-open="[[!wideLayout]]">
         <app-toolbar></app-toolbar>
 
         <!-- Nav on mobile: side nav menu -->
-        <paper-menu selected="[[page]]" attr-for-selected="name" role="navigation">
+        <iron-selector selected="[[page]]" attr-for-selected="name" role="navigation" class="drawer-list">
           <template is="dom-repeat" items="{{items}}">
-            <paper-item name="{{item}}">
-              <a href="[[basePath]]#/{{item}}">{{item}}</a>
-            </paper-item>
+              <a name="{{item}}" href="[[rootPath]]{{item}}">{{item}}</a>
           </template>
-        </paper-menu>
+        </iron-selector>
       </app-drawer>
 
       <!-- Main content -->
       <app-header-layout>
 
-        <app-header condenses reveals effects="waterfall">
+        <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle
                                hidden$="{{wideLayout}}"></paper-icon-button>
             <h2 main-title>Octavian Hasna</h2>
           </app-toolbar>
 
-          <app-toolbar sticky$="{{wideLayout}}" hidden$="{{!wideLayout}}">
+          <app-toolbar sticky$="[[wideLayout]]" hidden$="[[!wideLayout]]">
 
             <!-- Nav on desktop: tabs -->
-            <paper-tabs selected="{{page}}" attr-for-selected="name">
+            <paper-tabs selected="{{page}}" attr-for-selected="name" role="navigation">
               <template is="dom-repeat" items="{{items}}">
-                <paper-tab name="{{item}}">
-                  <a href="[[basePath]]#/{{item}}">{{item}}</a>
+                <paper-tab>
+                  <a href="[[rootPath]]{{item}}">{{item}}</a>
                 </paper-tab>
               </template>
             </paper-tabs>
@@ -137,71 +152,91 @@
         <research-page name="research"></research-page>
         <publications-page name="publications"></publications-page>
         <contact-page name="contact" local-part="octavian.hasna"></contact-page>
-        <error-page name="error" base-path="[[basePath]]"></error-page>
+        <error-page name="error"></error-page>
       </iron-pages>
     </app-drawer-layout>
 
     <footer>
-      <small>&copy; 2017 Octavian Hasna (rev 1)</small>
+      <small>&copy; 2018 Octavian Hasna (rev 1)</small>
     </footer>
   </template>
 
   <script>
-    Polymer({
-      is: 'main-app',
+    // Gesture events like tap and track generated from touch will not be
+    // preventable, allowing for better scrolling performance.
+    Polymer.setPassiveTouchGestures(true);
 
-      properties: {
-        basePath: String,
+    class MainApp extends Polymer.Element {
+      static get is() {
+        return 'main-app';
+      }
 
-        page: {
-          type: String,
-          reflectToAttribute: true,
-          observer: '_pageChanged'
-        },
+      static get properties() {
+        return {
+          page: {
+            type: String,
+            reflectToAttribute: true,
+            observer: '_pageChanged',
+          },
+          routeData: Object,
+          subroute: Object,
+          // This shouldn't be neccessary, but the Analyzer isn't picking up
+          // Polymer.Element#rootPath
+          rootPath: String,
+          wideLayout: {
+            type: Boolean,
+            value: false,
+            observer: '_layoutChange',
+          },
 
-        wideLayout: {
-          type: Boolean,
-          value: false,
-          observer: '_layoutChange'
-        },
+          items: {
+            type: Array,
+            value: function () {
+              return ['home', 'teaching', 'research',
+                'publications', 'contact'];
+            },
+          },
+        };
+      }
 
-        items: {
-          type: Array,
-          value: function () {
-            return ['home', 'teaching', 'research',
-              'publications', 'contact'];
-          }
-        }
-      },
+      static get observers() {
+        return [
+          '_routePageChanged(routeData.page)',
+        ];
+      }
 
-      observers: [
-        '_routePageChanged(routeData.page)',
-      ],
-
-      _routePageChanged: function (page) {
+      _routePageChanged(page) {
+        // If no page was found in the route data, page will be an empty string.
         this.page = page || 'home';
 
+        // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
           this.$.drawer.close();
         }
-      },
+      }
 
-      _pageChanged: function (page) {
+      _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('pages/' + page + '-page.html');
-        this.importHref(resolvedPageUrl, null, this._showPage404, true);
-      },
+        const resolvedPageUrl = this.resolveUrl('pages/' + page + '-page.html');
+        Polymer.importHref(
+          resolvedPageUrl,
+          null,
+          this._showPage404.bind(this),
+          true);
+      }
 
-      _showPage404: function () {
+      _showPage404() {
         this.page = 'error';
-      },
+      }
 
-      _layoutChange: function (wide) {
-        var drawer = this.$.drawer;
+      _layoutChange(wide) {
+        const drawer = this.$.drawer;
         if (wide && drawer.opened) {
           drawer.opened = false;
         }
       }
-    });
+    }
+
+    window.customElements.define(MainApp.is, MainApp);
   </script>
 </dom-module>

@@ -1,4 +1,4 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../shared-styles.html">
 
 <dom-module id="publications-page">
@@ -8,9 +8,18 @@
     <div class="card">
       <h2>Publications</h2>
 
+      <h3>2017</h3>
+      <p>
+        Octavian Lucian Hasna &amp; Rodica Potolea.
+        <b>Time series - A taxonomy based survey</b>.
+        In proceedings of the <i>Intelligent Computer Communication and Processing
+        (ICCP)</i> (pp. 231-238). Cluj-Napoca, Romania.
+        <a href="https://ieeexplore.ieee.org/abstract/document/8117009/">(link)</a>
+      </p>
+
       <h3>2016</h3>
       <p>
-        Octavian Lucian Hasna &amp; Rodica Potolea (2016).
+        Octavian Lucian Hasna &amp; Rodica Potolea.
         <b>The Longest Common Subsequence Distance using a Complexity Factor</b>.
         In proceedings of the <i>International Conference of Knowledge Discovery and Information Retrieval
         (KDIR)</i> (pp. 336-343). Porto, Portugal.
@@ -54,8 +63,12 @@
   </template>
 
   <script>
-    Polymer({
-      is: 'publications-page'
-    });
+    class PublicationPage extends Polymer.Element {
+      static get is() {
+        return 'publications-page';
+      }
+    }
+
+    window.customElements.define(PublicationPage.is, PublicationPage);
   </script>
 </dom-module>

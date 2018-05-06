@@ -23,12 +23,10 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
     echo "Deploying to users.utcluj.ro"
     # update build number
     sed --in-place "s/(rev 1)/(rev $TRAVIS_BUILD_NUMBER)/g" src/main-app.html
-    # update base path
-    sed --in-place "s/\"\/\"/\"\/~octavianh\/\"/g" index.html
     # build app
-    polymer build
+    polymer build --base-path=/~octavianh/
     # copy dist folder content to users.utcluj.ro
-    lftp -u $FTP_USER,$FTP_PASS users.utcluj.ro -e 'mirror --delete --only-newer --reverse --verbose build/bundled ~/public_html ; exit'
+    lftp -u $FTP_USER,$FTP_PASS users.utcluj.ro -e 'mirror --delete --only-newer --reverse --verbose build/default ~/public_html ; exit'
 else
    echo "Skip deploy"
 fi

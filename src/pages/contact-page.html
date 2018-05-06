@@ -1,4 +1,4 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../shared-styles.html">
 
 <dom-module id="contact-page">
@@ -23,11 +23,18 @@
   </template>
 
   <script>
-    Polymer({
-      is: 'contact-page',
-      properties: {
-        localPart: String
+    class ContactPage extends Polymer.Element {
+      static get is() {
+        return 'contact-page';
       }
-    });
+
+      static get properties() {
+        return {
+          localPart: String,
+        };
+      }
+    }
+
+    window.customElements.define(ContactPage.is, ContactPage);
   </script>
 </dom-module>

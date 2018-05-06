@@ -1,4 +1,4 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../shared-styles.html">
 
 <dom-module id="error-page">
@@ -7,17 +7,23 @@
 
     <div class="card">
       <h2>Page not found</h2>
-      <p>Head back to <a href="[[basePath]]#/">home</a>.</p>
+      <p>Head back to <a href="[[rootPath]]">home</a>.</p>
     </div>
   </template>
 
   <script>
-    Polymer({
-      is: 'error-page',
-
-      properties: {
-        basePath: String
+    class ErrorPage extends Polymer.Element {
+      static get is() {
+        return 'error-page';
       }
-    });
+
+      static get properties() {
+        return {
+          rootPath: String,
+        };
+      }
+    }
+
+    window.customElements.define(ErrorPage.is, ErrorPage);
   </script>
 </dom-module>
