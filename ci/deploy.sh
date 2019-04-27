@@ -25,9 +25,6 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
     echo "Update build number"
     sed --in-place "s/(rev 1)/(rev $TRAVIS_BUILD_NUMBER)/g" src/components/university-page-app.js
 
-#    echo "Update rootPath"
-#    sed --in-place "s/'\/'/'\/~octavianh\/'/g" index.html
-
     echo "Build app"
     polymer build
 
@@ -37,7 +34,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
     lftp -e "set dns:order 'inet'
       open ftp://users.utcluj.ro
       user $FTP_USER $FTP_PASS
-      mirror --delete --only-newer --reverse --verbose $LOCAL_PATH $REMOTE_PATH
+      mirror --delete --continue --reverse --verbose $LOCAL_PATH $REMOTE_PATH
       bye"
 else
    echo "Skip deploy"

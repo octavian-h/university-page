@@ -1,27 +1,18 @@
 language: node_js
-# use only one version of node_js
 node_js:
   - '10'
 os: linux
 sudo: false
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
     packages:
-    # see https://docs.travis-ci.com/user/languages/javascript-with-nodejs#Node.js-v4-(or-io.js-v3)-compiler-requirements
-    - g++-4.8
     - lftp
 branches:
   only:
   - master
-before_script:
-  - npm install
 script:
 - bash ./ci/deploy.sh
 env:
-  matrix:
-  - CXX=g++-4.8
   global:
   - secure: jMl7dNIDF2eiaAxYkzlE8eyuHF+HdQc1cwleziDkUWKdyAnZwGFxXkV8pxptiQPNlZuY1+QzN9q3DKg0L6lN1MmvKhh3RsRJLU98SZzRjbgZ4vFOyrQmHO9j9ddmTIVoLEmR1Xp90cZajHv2Ro94SRkY9d0cSB8T1tG1lnIbH8LmTzS7FsagN8yumqSGyMDO6VmiqxgLPgJtWSg+yyWYvTCrAwucqwIOTCOQpWgoPBjtzD7FM0G6crbL8iMcppScJ7ejWXVqZGPSBKzmMRxXXUdgnwG4OKvDfmsMGdvl8vJwi/bJB3PqXcpBTW4diuRZSU+fQqttCWzii9SNehLGgR+kTBVvN7cq1eblnKbVX52tVhTgPxWgnruMXy4+P3Pv0c/+3qEYwtpU+N8r4JzHPHOV5kzOagF+3ffEH2gyKjAzeWABFoMjFuqUeWOHvd9NlWGo60+e30GWO2jwwASb5ulLjw9pMytwZcIKYky+ex8d083F73zDDb9zjK918r/Wxc8c6YYsShaaHmAgqzRdCIKeD/GIJWT56rX4JE5w/RstlUP47RJtySJ4oEXXdc2gfTeB8RN+0yPhbDikEe6UEGbvgUfiGbEQdjavWDPmdVUChGvJG5LkVudTGxQKx6HH19wJezfGqLrRL8SK0XWf3x2SS0ob+QxJY3lUdGkQyGI=
   - secure: gNT1l4Jp2Sdjka+xQG58zN977K1U1JDre4WC/266bCjrgygdW8CnO6O15s8OlJ2TVVqUEPNDNftaYF+k911gjSyg8+vDQD8SB0xYxdFJTcVSx3FFbTi/kEmoPg6/pxAPuXkB/9JpVDQhewE3FW+HcKvimkswEcgtqtcYo3cPi1xSeHt9qrYypwklIKqQonG+bhSTMQnFTI8cB43RsdzRDFbwbL60jWppz130gGJmSik90lNPVpfGZHyU1tFOyUKAGjh9LywDO5dxGucI3rxNvU6ArV+lGHqFKj04gXXZNE7VnVDQYHQf0T/ByvrQbPijmoGmUGJV0nJfaZay+BR2P9afzDMnxrkcMQwObyh8Nw30ZmTE0LPyuahEUf8ArOirCMjclGN/FzovuwcKySwTUaN2pEOnQL6ujvjhv3SXbC7mft9xDnv/wBaM+O8R5+W1qq0F5Q9v2XIbvMg5lVkfZQGKJ6cMRJuV6N4QMXunE0sts7HQh1KVDRZO3AJNUZJcGJM+IemQ4+kJ9WwGDqFH+vzx9BOMIW4EnO7+4MK30jMSbxvIWypwWcNXltBbAGDMOdtCMwQ+YoH98/5hAQXLDCHMMX+5q3CBghlqQILKxpKGxfu7+247oLgbGt/CniReC+frXfZ96HfYidANG9sgMl/glOhPF3UCYY8Su68RhM8=
