@@ -1,7 +1,7 @@
 language: node_js
 # use only one version of node_js
 node_js:
-  - '6'
+  - '10'
 os: linux
 sudo: false
 addons:
@@ -16,8 +16,7 @@ branches:
   only:
   - master
 before_script:
-  - npm install -g bower polymer-cli
-  - bower install
+  - npm install
 script:
 - bash ./ci/deploy.sh
 env:

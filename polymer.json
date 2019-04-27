@@ -1,31 +1,32 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/main-app.html",
-  "fragments": [
-    "src/pages/home-page.html",
-    "src/pages/teaching-page.html",
-    "src/pages/research-page.html",
-    "src/pages/publications-page.html",
-    "src/pages/contact-page.html",
-    "src/pages/error-page.html"
-  ],
+  "shell": "src/components/university-page-app.js",
   "sources": [
-    "src/**/*",
-    "images/**/*",
-    "bower.json"
+    "images/**/*"
   ],
   "extraDependencies": [
     "manifest.json",
     "robots.txt",
-    "bower_components/webcomponentsjs/*",
-    "!bower_components/webcomponentsjs/gulpfile.js"
+    "node_modules/@webcomponents/webcomponentsjs/**"
   ],
-  "lint": {
-    "rules": ["polymer-2"]
-  },
   "builds": [
     {
-      "preset": "es5-bundled"
+      "name": "es5-bundled",
+      "js": {
+        "compile": "es5",
+        "minify": true,
+        "transformModulesToAmd": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "bundle": true,
+      "addServiceWorker": true
     }
-  ]
+  ],
+  "moduleResolution": "node",
+  "npm": true
 }

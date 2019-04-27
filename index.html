@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Polymer Starter Kit">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-
   <title>Octavian Hasna - Technical University of Cluj-Napoca</title>
+
+  <meta name="generator" content="PWA Starter Kit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="University website of Octavian Hasna">
 
   <link rel="icon" href="images/favicon.ico">
@@ -14,7 +14,7 @@
   <link rel="manifest" href="manifest.json">
 
   <!-- See https://goo.gl/qRE0vM -->
-  <meta name="theme-color" content="#3F51B5">
+  <meta name="theme-color" content="#3f51b5">
 
   <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -22,7 +22,7 @@
 
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Octavian's homepage">
 
   <!-- Homescreen icons -->
@@ -37,43 +37,57 @@
   <meta name="msapplication-TileColor" content="#3f51b5">
   <meta name="msapplication-tap-highlight" content="no">
 
+  <!-- Performance tip: hint to the browser to start the handshake for the fonts site -->
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <script>
-    window.Polymer = {rootPath: '/'};
-
     // Load and register pre-caching Service Worker
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
+      window.addEventListener('load', function () {
         navigator.serviceWorker.register('service-worker.js', {
-          scope: Polymer.rootPath,
+          scope: '/~octavianh/',
         });
       });
     }
+
+    // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+    // https://github.com/reactjs/redux/issues/2907
+    window.process = {env: {NODE_ENV: 'production'}};
   </script>
-
-  <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-  <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-
-  <!-- Load your application shell -->
-  <link rel="import" href="src/main-app.html">
 
   <!-- Add any global styles for body, document, etc. -->
   <style>
+    @font-face {
+      font-family: 'Pacifico';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/Q_Z9mv4hySLTMoMjnk_rCXYhjbSpvc47ee6xR_80Hnw.woff2) format('woff2');
+      /* The browser draws the text immediately in the fallback font if the font
+         isn't loaded, then swaps it with the webfont when it eventually loads
+         See: https://developers.google.com/web/updates/2016/02/font-display
+      */
+      font-display: swap;
+    }
+
     body {
       margin: 0;
-      font-family: 'Roboto', 'Noto', sans-serif;
+      /* This is a font-stack that tries to use the system-default sans-serifs first */
+      font-family: Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       line-height: 1.5;
       min-height: 100vh;
-      background-color: #eeeeee;
+      -webkit-font-smoothing: antialiased;
     }
   </style>
 </head>
 <body>
 
-<main-app></main-app>
-
+<university-page-app appTitle="Octavian Hasna" rootPath="/~octavianh/"></university-page-app>
 <noscript>
   Please enable JavaScript to view this website.
 </noscript>
+<!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+<script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+<!-- Built with love using PWA Starter Kit -->
+<script type="module" src="src/components/university-page-app.js"></script>
 <script>
   !function(L, u, c, i, a, n) {L.GoogleAnalyticsObject=c; L[c]||(L[c]=function() {(L[c].q=L[c].q||[]).push(arguments);});
     L[c].l=+new Date; a=u.createElement(i); n=u.getElementsByTagName(i)[0];

@@ -23,10 +23,10 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
     echo "Deploying to users.utcluj.ro"
 
     echo "Update build number"
-    sed --in-place "s/(rev 1)/(rev $TRAVIS_BUILD_NUMBER)/g" src/main-app.html
+    sed --in-place "s/(rev 1)/(rev $TRAVIS_BUILD_NUMBER)/g" src/components/university-page-app.js
 
-    echo "Update rootPath"
-    sed --in-place "s/'\/'/'\/~octavianh\/'/g" index.html
+#    echo "Update rootPath"
+#    sed --in-place "s/'\/'/'\/~octavianh\/'/g" index.html
 
     echo "Build app"
     polymer build
